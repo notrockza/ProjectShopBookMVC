@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BookShopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="BookShopModel.Admin" />
+    <EntitySet Name="OrderBook" EntityType="BookShopModel.OrderBook" />
+    <EntitySet Name="ProductBook" EntityType="BookShopModel.ProductBook" />
+    <EntitySet Name="PublisherBook" EntityType="BookShopModel.PublisherBook" />
+    <EntitySet Name="SalesSlip" EntityType="BookShopModel.SalesSlip" />
+    <EntitySet Name="sysdiagrams" EntityType="BookShopModel.sysdiagrams" />
+    <EntitySet Name="TypeBook" EntityType="BookShopModel.TypeBook" />
+    <EntitySet Name="User" EntityType="BookShopModel.User" />
+    <AssociationSet Name="FK_OrderBook_ProductBook" Association="BookShopModel.FK_OrderBook_ProductBook">
+      <End EntitySet="ProductBook" Role="ProductBook" />
+      <End EntitySet="OrderBook" Role="OrderBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBook_SalesSlip" Association="BookShopModel.FK_OrderBook_SalesSlip">
+      <End EntitySet="SalesSlip" Role="SalesSlip" />
+      <End EntitySet="OrderBook" Role="OrderBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBook_PublisherBook" Association="BookShopModel.FK_ProductBook_PublisherBook">
+      <End EntitySet="PublisherBook" Role="PublisherBook" />
+      <End EntitySet="ProductBook" Role="ProductBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBook_TypeBook" Association="BookShopModel.FK_ProductBook_TypeBook">
+      <End EntitySet="TypeBook" Role="TypeBook" />
+      <End EntitySet="ProductBook" Role="ProductBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesSlip_User1" Association="BookShopModel.FK_SalesSlip_User1">
+      <End EntitySet="User" Role="User" />
+      <End EntitySet="SalesSlip" Role="SalesSlip" />
+    </AssociationSet>
+    <EntitySet Name="Payment" EntityType="BookShopModel.Payment" />
+    <EntitySet Name="Status" EntityType="BookShopModel.Status" />
+    <AssociationSet Name="FK_OrderBook_Status" Association="BookShopModel.FK_OrderBook_Status">
+      <End EntitySet="Status" Role="Status" />
+      <End EntitySet="OrderBook" Role="OrderBook" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+    </Key>
+    <Property Name="Admin_Id" Nullable="false" Type="Int32" />
+    <Property Name="Admin_Username" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Admin_Password" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+  </EntityType>
+  <EntityType Name="OrderBook">
+    <Key>
+      <PropertyRef Name="Order_Id" />
+    </Key>
+    <Property Name="Order_Id" Nullable="false" Type="Int32" />
+    <Property Name="Order_SalesId" Type="Int32" />
+    <Property Name="Order_Date" Precision="0" Type="DateTime" />
+    <Property Name="Order_NumProduct" Type="Int32" />
+    <Property Name="Order_BookId" Type="Int32" />
+    <NavigationProperty Name="ProductBook" Relationship="BookShopModel.FK_OrderBook_ProductBook" FromRole="OrderBook" ToRole="ProductBook" />
+    <NavigationProperty Name="SalesSlip" Relationship="BookShopModel.FK_OrderBook_SalesSlip" FromRole="OrderBook" ToRole="SalesSlip" />
+    <Property Name="Order_Price" Precision="18" Scale="0" Type="Decimal" />
+    <Property Name="Order_Status_Id" Type="Int32" />
+    <NavigationProperty Name="Status" Relationship="BookShopModel.FK_OrderBook_Status" FromRole="OrderBook" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="ProductBook">
+    <Key>
+      <PropertyRef Name="Product_BookId" />
+    </Key>
+    <Property Name="Product_BookId" Nullable="false" Type="Int32" />
+    <Property Name="Product_TypeId" Type="Int32" />
+    <Property Name="Product_PublisherId" Type="Int32" />
+    <Property Name="Product_Name" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Product_Price" Type="Int32" />
+    <Property Name="Product_Num" Type="Int32" />
+    <Property Name="Product_Image" MaxLength="Max" FixedLength="false" Type="Binary" />
+    <NavigationProperty Name="OrderBook" Relationship="BookShopModel.FK_OrderBook_ProductBook" FromRole="ProductBook" ToRole="OrderBook" />
+    <NavigationProperty Name="PublisherBook" Relationship="BookShopModel.FK_ProductBook_PublisherBook" FromRole="ProductBook" ToRole="PublisherBook" />
+    <NavigationProperty Name="TypeBook" Relationship="BookShopModel.FK_ProductBook_TypeBook" FromRole="ProductBook" ToRole="TypeBook" />
+  </EntityType>
+  <EntityType Name="PublisherBook">
+    <Key>
+      <PropertyRef Name="Publisher_id" />
+    </Key>
+    <Property Name="Publisher_id" Nullable="false" Type="Int32" />
+    <Property Name="Publisher_name" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="ProductBook" Relationship="BookShopModel.FK_ProductBook_PublisherBook" FromRole="PublisherBook" ToRole="ProductBook" />
+  </EntityType>
+  <EntityType Name="SalesSlip">
+    <Key>
+      <PropertyRef Name="Sales_Id" />
+    </Key>
+    <Property Name="Sales_Id" Nullable="false" Type="Int32" />
+    <Property Name="Sales_date" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="Sales_Product" Type="Int32" />
+    <Property Name="Sales_Userid" Type="Int32" />
+    <Property Name="Sales_NumProduct" Type="Int32" />
+    <NavigationProperty Name="OrderBook" Relationship="BookShopModel.FK_OrderBook_SalesSlip" FromRole="SalesSlip" ToRole="OrderBook" />
+    <NavigationProperty Name="User" Relationship="BookShopModel.FK_SalesSlip_User1" FromRole="SalesSlip" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" Type="String" />
+    <Property Name="principal_id" Nullable="false" Type="Int32" />
+    <Property Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" MaxLength="Max" FixedLength="false" Type="Binary" />
+  </EntityType>
+  <EntityType Name="TypeBook">
+    <Key>
+      <PropertyRef Name="Type_Id" />
+    </Key>
+    <Property Name="Type_Id" Nullable="false" Type="Int32" />
+    <Property Name="Type_Name" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="ProductBook" Relationship="BookShopModel.FK_ProductBook_TypeBook" FromRole="TypeBook" ToRole="ProductBook" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Nullable="false" Type="Int32" />
+    <Property Name="User_Name" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="User_Password" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="User_Nickname" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="User_Address" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="User_Tel" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <Property Name="User_Email" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="SalesSlip" Relationship="BookShopModel.FK_SalesSlip_User1" FromRole="User" ToRole="SalesSlip" />
+  </EntityType>
+  <Association Name="FK_OrderBook_ProductBook">
+    <End Type="BookShopModel.ProductBook" Multiplicity="0..1" Role="ProductBook" />
+    <End Type="BookShopModel.OrderBook" Multiplicity="*" Role="OrderBook" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBook">
+        <PropertyRef Name="Product_BookId" />
+      </Principal>
+      <Dependent Role="OrderBook">
+        <PropertyRef Name="Order_BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBook_SalesSlip">
+    <End Type="BookShopModel.SalesSlip" Multiplicity="0..1" Role="SalesSlip" />
+    <End Type="BookShopModel.OrderBook" Multiplicity="*" Role="OrderBook" />
+    <ReferentialConstraint>
+      <Principal Role="SalesSlip">
+        <PropertyRef Name="Sales_Id" />
+      </Principal>
+      <Dependent Role="OrderBook">
+        <PropertyRef Name="Order_SalesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBook_PublisherBook">
+    <End Type="BookShopModel.PublisherBook" Multiplicity="0..1" Role="PublisherBook" />
+    <End Type="BookShopModel.ProductBook" Multiplicity="*" Role="ProductBook" />
+    <ReferentialConstraint>
+      <Principal Role="PublisherBook">
+        <PropertyRef Name="Publisher_id" />
+      </Principal>
+      <Dependent Role="ProductBook">
+        <PropertyRef Name="Product_PublisherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBook_TypeBook">
+    <End Type="BookShopModel.TypeBook" Multiplicity="0..1" Role="TypeBook" />
+    <End Type="BookShopModel.ProductBook" Multiplicity="*" Role="ProductBook" />
+    <ReferentialConstraint>
+      <Principal Role="TypeBook">
+        <PropertyRef Name="Type_Id" />
+      </Principal>
+      <Dependent Role="ProductBook">
+        <PropertyRef Name="Product_TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesSlip_User1">
+    <End Type="BookShopModel.User" Multiplicity="0..1" Role="User" />
+    <End Type="BookShopModel.SalesSlip" Multiplicity="*" Role="SalesSlip" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="SalesSlip">
+        <PropertyRef Name="Sales_Userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Pay_Id" />
+    </Key>
+    <Property Name="Pay_Id" Nullable="false" Type="Int32" />
+    <Property Name="Pay_Oder_Id" Type="Int32" />
+    <Property Name="Pay_Product_Id" Type="Int32" />
+    <Property Name="Pay_Slipimage" MaxLength="Max" FixedLength="false" Type="Binary" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Status_Id" />
+    </Key>
+    <Property Name="Status_Id" Nullable="false" Type="Int32" />
+    <Property Name="Status_Name" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+    <NavigationProperty Name="OrderBook" Relationship="BookShopModel.FK_OrderBook_Status" FromRole="Status" ToRole="OrderBook" />
+  </EntityType>
+  <Association Name="FK_OrderBook_Status">
+    <End Type="BookShopModel.Status" Multiplicity="0..1" Role="Status" />
+    <End Type="BookShopModel.OrderBook" Multiplicity="*" Role="OrderBook" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_Id" />
+      </Principal>
+      <Dependent Role="OrderBook">
+        <PropertyRef Name="Order_Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

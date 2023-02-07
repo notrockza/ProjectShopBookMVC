@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Projent_NOTZA.Models.PublisherBook>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<br />
+<br />
+
+<h2>สำนักพิมพ์</h2>
+
+<p>
+    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("เพื่มข้อมูล", "Create")</button>
+    @*<button class="btn btn-outline-primary">@Html.ActionLink("เพื่มข้อมูล", "Create",  new { id = item.Publisher_id },new{ @class = "fa fa-plus-square-o" }) </button>*@
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ชื่อสำนักพิมพ์
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher_name)
+            </td>
+            <td>
+
+                <button type="button" class="btn btn-outline-warning">@Html.ActionLink("เเก้ไข", "Edit", new { id = item.Publisher_id })</button>
+
+                <button type="button" class="btn btn-outline-danger">@Html.ActionLink("ลบ", "Delete", new { id = item.Publisher_id })</button>
+            </td>
+        </tr>
+    }
+
+</table>

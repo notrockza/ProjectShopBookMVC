@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Admin_Id" />
+    </Key>
+    <Property Name="Admin_Id" Nullable="false" Type="int" />
+    <Property Name="Admin_Username" MaxLength="50" Type="varchar" />
+    <Property Name="Admin_Password" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <EntityType Name="OrderBook">
+    <Key>
+      <PropertyRef Name="Order_Id" />
+    </Key>
+    <Property Name="Order_Id" Nullable="false" Type="int" />
+    <Property Name="Order_SalesId" Type="int" />
+    <Property Name="Order_Date" Type="date" />
+    <Property Name="Order_NumProduct" Type="int" />
+    <Property Name="Order_Price" Precision="18" Scale="0" Type="decimal" />
+    <Property Name="Order_BookId" Type="int" />
+    <Property Name="Order_Status_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Pay_Id" />
+    </Key>
+    <Property Name="Pay_Id" Nullable="false" Type="int" />
+    <Property Name="Pay_Oder_Id" Type="int" />
+    <Property Name="Pay_Product_Id" Type="int" />
+    <Property Name="Pay_Slipimage" Type="image" />
+  </EntityType>
+  <EntityType Name="ProductBook">
+    <Key>
+      <PropertyRef Name="Product_BookId" />
+    </Key>
+    <Property Name="Product_BookId" Nullable="false" Type="int" />
+    <Property Name="Product_TypeId" Type="int" />
+    <Property Name="Product_PublisherId" Type="int" />
+    <Property Name="Product_Name" MaxLength="50" Type="varchar" />
+    <Property Name="Product_Price" Type="int" />
+    <Property Name="Product_Num" Type="int" />
+    <Property Name="Product_Image" Type="image" />
+  </EntityType>
+  <EntityType Name="PublisherBook">
+    <Key>
+      <PropertyRef Name="Publisher_id" />
+    </Key>
+    <Property Name="Publisher_id" Nullable="false" Type="int" />
+    <Property Name="Publisher_name" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <EntityType Name="SalesSlip">
+    <Key>
+      <PropertyRef Name="Sales_Id" />
+    </Key>
+    <Property Name="Sales_Id" Nullable="false" Type="int" />
+    <Property Name="Sales_date" MaxLength="50" Type="varchar" />
+    <Property Name="Sales_Product" Type="int" />
+    <Property Name="Sales_Userid" Type="int" />
+    <Property Name="Sales_NumProduct" Type="int" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Status_Id" />
+    </Key>
+    <Property Name="Status_Id" Nullable="false" Type="int" />
+    <Property Name="Status_Name" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Nullable="false" MaxLength="128" Type="nvarchar" />
+    <Property Name="principal_id" Nullable="false" Type="int" />
+    <Property Name="diagram_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TypeBook">
+    <Key>
+      <PropertyRef Name="Type_Id" />
+    </Key>
+    <Property Name="Type_Id" Nullable="false" Type="int" />
+    <Property Name="Type_Name" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="User_Id" />
+    </Key>
+    <Property Name="User_Id" Nullable="false" Type="int" />
+    <Property Name="User_Name" MaxLength="50" Type="varchar" />
+    <Property Name="User_Password" MaxLength="50" Type="varchar" />
+    <Property Name="User_Nickname" MaxLength="50" Type="varchar" />
+    <Property Name="User_Address" MaxLength="50" Type="varchar" />
+    <Property Name="User_Tel" MaxLength="50" Type="varchar" />
+    <Property Name="User_Email" MaxLength="50" Type="varchar" />
+  </EntityType>
+  <Association Name="FK_OrderBook_ProductBook">
+    <End Type="Self.ProductBook" Multiplicity="0..1" Role="ProductBook" />
+    <End Type="Self.OrderBook" Multiplicity="*" Role="OrderBook" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBook">
+        <PropertyRef Name="Product_BookId" />
+      </Principal>
+      <Dependent Role="OrderBook">
+        <PropertyRef Name="Order_BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBook_SalesSlip">
+    <End Type="Self.SalesSlip" Multiplicity="0..1" Role="SalesSlip" />
+    <End Type="Self.OrderBook" Multiplicity="*" Role="OrderBook" />
+    <ReferentialConstraint>
+      <Principal Role="SalesSlip">
+        <PropertyRef Name="Sales_Id" />
+      </Principal>
+      <Dependent Role="OrderBook">
+        <PropertyRef Name="Order_SalesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderBook_Status">
+    <End Type="Self.Status" Multiplicity="0..1" Role="Status" />
+    <End Type="Self.OrderBook" Multiplicity="*" Role="OrderBook" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Status_Id" />
+      </Principal>
+      <Dependent Role="OrderBook">
+        <PropertyRef Name="Order_Status_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBook_PublisherBook">
+    <End Type="Self.PublisherBook" Multiplicity="0..1" Role="PublisherBook" />
+    <End Type="Self.ProductBook" Multiplicity="*" Role="ProductBook" />
+    <ReferentialConstraint>
+      <Principal Role="PublisherBook">
+        <PropertyRef Name="Publisher_id" />
+      </Principal>
+      <Dependent Role="ProductBook">
+        <PropertyRef Name="Product_PublisherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBook_TypeBook">
+    <End Type="Self.TypeBook" Multiplicity="0..1" Role="TypeBook" />
+    <End Type="Self.ProductBook" Multiplicity="*" Role="ProductBook" />
+    <ReferentialConstraint>
+      <Principal Role="TypeBook">
+        <PropertyRef Name="Type_Id" />
+      </Principal>
+      <Dependent Role="ProductBook">
+        <PropertyRef Name="Product_TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalesSlip_User1">
+    <End Type="Self.User" Multiplicity="0..1" Role="User" />
+    <End Type="Self.SalesSlip" Multiplicity="*" Role="SalesSlip" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="User_Id" />
+      </Principal>
+      <Dependent Role="SalesSlip">
+        <PropertyRef Name="Sales_Userid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BookShopModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderBook" EntityType="Self.OrderBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductBook" EntityType="Self.ProductBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PublisherBook" EntityType="Self.PublisherBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesSlip" EntityType="Self.SalesSlip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeBook" EntityType="Self.TypeBook" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_OrderBook_ProductBook" Association="Self.FK_OrderBook_ProductBook">
+      <End EntitySet="ProductBook" Role="ProductBook" />
+      <End EntitySet="OrderBook" Role="OrderBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBook_SalesSlip" Association="Self.FK_OrderBook_SalesSlip">
+      <End EntitySet="SalesSlip" Role="SalesSlip" />
+      <End EntitySet="OrderBook" Role="OrderBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderBook_Status" Association="Self.FK_OrderBook_Status">
+      <End EntitySet="Status" Role="Status" />
+      <End EntitySet="OrderBook" Role="OrderBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBook_PublisherBook" Association="Self.FK_ProductBook_PublisherBook">
+      <End EntitySet="PublisherBook" Role="PublisherBook" />
+      <End EntitySet="ProductBook" Role="ProductBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBook_TypeBook" Association="Self.FK_ProductBook_TypeBook">
+      <End EntitySet="TypeBook" Role="TypeBook" />
+      <End EntitySet="ProductBook" Role="ProductBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalesSlip_User1" Association="Self.FK_SalesSlip_User1">
+      <End EntitySet="User" Role="User" />
+      <End EntitySet="SalesSlip" Role="SalesSlip" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

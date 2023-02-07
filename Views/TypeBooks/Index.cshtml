@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Projent_NOTZA.Models.TypeBook>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<br />
+<br />
+
+<h2>ประเภทหนังสือ</h2>
+
+<p>
+    <button type="button" class="btn btn-outline-primary"> @Html.ActionLink("เพื่มข้อมูล", "Create")</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ประเภท
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type_Name)
+            </td>
+            <td>
+
+            <button type="button" class="btn btn-outline-warning">@Html.ActionLink("เเก้ไข", "Edit", new { id = item.Type_Id })</button>
+ 
+            <button type="button" class="btn btn-outline-danger">@Html.ActionLink("ลบ", "Delete", new { id = item.Type_Id })</button>
+               
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+        $(document).ready(function ()
+        {
+            $('#MyTable').DataTable();
+        });
+        function onDelete(id)
+        {
+            swal({ title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            }).then((willDelete) =>
+            {
+                if (willDelete)
+                {
+                    window.location.href = '@Url.Action("Delete", "Type_Id")?id=' + id;
+                    swal("Poof! Your imaginary file has been deleted!", { icon: "success", });
+                }
+
+                else
+                {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+        }
+</script>*@

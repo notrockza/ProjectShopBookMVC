@@ -1,0 +1,67 @@
+﻿@model Projent_NOTZA.Models.OrderBook
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderBook</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Order_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order_NumProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order_NumProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Order_Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order_Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductBook.Product_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductBook.Product_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalesSlip.Sales_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalesSlip.Sales_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.Status_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status.Status_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Order_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

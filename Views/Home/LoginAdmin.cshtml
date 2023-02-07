@@ -1,0 +1,152 @@
+﻿@*@model Projent_NOTZA.Models.Admin
+
+    @{
+        ViewBag.Title = "LoginAdmin";
+        Layout = null;
+    }
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <div style="padding-top:150px;padding-left:250px">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <h5 style="padding-left:200px">ยินดีต้อนรับเข้าสู่ระบบ</h5>
+            <br />
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Admin_Username, new { htmlAttributes = new { @placeholder = "ชื่อ Admin", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Admin_Username, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Admin_Password, new { htmlAttributes = new { @placeholder = "รหัสผ่าน", @class = "form-control", @type = "Password" } })
+                        @Html.ValidationMessageFor(model => model.Admin_Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                    <label for="remember"> Remember Me</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-7">
+                        <button type="submit" class="btn  btn-info" onclick="location.href='@Url.Action("Index","Users")';"><span class="fas fa-sign-in-alt">เข้าสู่ระบบ</span></button>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+
+
+@model Projent_NOTZA.Models.Admin
+
+@{
+    ViewBag.Title = "AdminLogin";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V14</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/Flogin/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/Flogin/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Flogin/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
+                <div style="padding-top:250px;padding-top:50px">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h5 style="padding-left:10px">Admin Login</h5>
+                        <br />
+                        <div class="form-horizontal" style="padding-right:250px;padding-right:100px">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Admin_Username, new { htmlAttributes = new { @placeholder = "ชื่อ Admin", @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Admin_Username, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Admin_Password, new { htmlAttributes = new { @placeholder = "รหัสผ่าน", @class = "form-control", @type = "Password" } })
+                                    @Html.ValidationMessageFor(model => model.Admin_Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+                                <label for="remember"> Remember Me</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-7">
+                                    <button type="submit" class="btn  btn-info"><span class="fas fa-sign-in-alt">เข้าสู่ระบบ</span></button>
+                                    <button type="button" onclick="location.href='@Url.Action("Index","Users")';"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="~/Flogin/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Flogin/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Flogin/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/Flogin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Flogin/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Flogin/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/Flogin/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Flogin/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/Flogin/js/main.js"></script>
+
+</body>
+</html>
+

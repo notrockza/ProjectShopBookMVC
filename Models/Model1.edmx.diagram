@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2d84537bf1c44e2787b847b9a6747468" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="BookShopModel.Admin" PointX="7.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.OrderBook" PointX="5.25" PointY="1" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.ProductBook" PointX="3" PointY="1" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.PublisherBook" PointX="0.75" PointY="5.625" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.SalesSlip" PointX="3" PointY="8.25" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.sysdiagrams" PointX="7.75" PointY="3.75" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.TypeBook" PointX="0.75" PointY="1.625" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.User" PointX="0.75" PointY="8.125" Width="1.5" />
+        <AssociationConnector Association="BookShopModel.FK_OrderBook_ProductBook" />
+        <AssociationConnector Association="BookShopModel.FK_OrderBook_SalesSlip" />
+        <AssociationConnector Association="BookShopModel.FK_ProductBook_PublisherBook" />
+        <AssociationConnector Association="BookShopModel.FK_ProductBook_TypeBook" />
+        <AssociationConnector Association="BookShopModel.FK_SalesSlip_User1" />
+        <EntityTypeShape EntityType="BookShopModel.Payment" PointX="5.75" PointY="4.75" Width="1.5" />
+        <EntityTypeShape EntityType="BookShopModel.Status" PointX="3" PointY="4.75" Width="1.5" />
+        <AssociationConnector Association="BookShopModel.FK_OrderBook_Status" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

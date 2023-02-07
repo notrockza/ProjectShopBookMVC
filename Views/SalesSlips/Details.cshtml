@@ -1,0 +1,51 @@
+﻿@model Projent_NOTZA.Models.SalesSlip
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SalesSlip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sales_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sales_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sales_Product)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sales_Product)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sales_NumProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sales_NumProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.User_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.User_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Sales_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

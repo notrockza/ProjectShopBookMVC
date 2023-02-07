@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Projent_NOTZA.Models.SalesSlip>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sales_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sales_Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sales_NumProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.User_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sales_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sales_Product)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sales_NumProduct)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.User_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Sales_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Sales_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Sales_Id })
+        </td>
+    </tr>
+}
+
+</table>

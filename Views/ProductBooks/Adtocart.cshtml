@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Adtocart";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br />
+<br />
+<br />
+<div class="card border-primary mb-3" style="max-width: 70rem;">
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    @if (Model.Product_Image != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(Model.Product_Image)"
+                             width="350" style="border-radius: 0%">
+                    }
+                </div>
+
+                <div class="col-sm-7 col-lg-7 col-md-7">
+                    <h4> @Model.Product_Name</h4>
+                    <h5>ราคา : @Model.Product_Price</h5>
+                    @*<h6>รายละเอียด : @Model.Pro_Detail</h6>*@
+                    <form action="@Url.Action("add","OrderBooks")" method="post">
+                        <input type="hidden" name="id" value="@Model.Product_BookId" />
+                        <input type="number" name="qty" value="1" id="qty" min="1" max="@Model.Product_Num" />
+                        <button type="submit" class="btn btn-outline-warning">
+                            <span class="glyphicon glyphicon-th-list"><i class='fab fa-bitcoin'></i>  ซื้อสินค้า</span>
+                        </button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
